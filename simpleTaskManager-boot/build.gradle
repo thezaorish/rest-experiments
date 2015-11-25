@@ -11,12 +11,13 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot' 
+apply plugin: 'war'
 
-jar {
-    baseName = 'stm-boot'
+
+war {
+    baseName = 'simpleTaskManager-boot'
     version = '0.0.1-SNAPSHOT'
 }
 sourceCompatibility = 1.8
@@ -26,19 +27,20 @@ repositories {
     mavenCentral()
 }
 
-
-dependencies {
-    compile('org.springframework.boot:spring-boot-starter-web')
-    testCompile('org.springframework.boot:spring-boot-starter-test') 
-    testCompile('org.springframework.restdocs:spring-restdocs-mockmvc:1.0.0.RELEASE')
+configurations {
+    providedRuntime
 }
 
-
-eclipse {
-    classpath {
-         containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
-         containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
-    }
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile('org.springframework.boot:spring-boot-starter-aop')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-security')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    runtime('com.h2database:h2')
+    runtime('mysql:mysql-connector-java')
+    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+    testCompile('org.springframework.boot:spring-boot-starter-test') 
 }
 
 task wrapper(type: Wrapper) {
