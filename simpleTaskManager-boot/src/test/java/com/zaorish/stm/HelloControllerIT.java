@@ -1,10 +1,11 @@
-package com.zaorish;
+package com.zaorish.stm;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 import java.net.URL;
 
+import com.zaorish.stm.config.SimpleTaskManagerApp;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

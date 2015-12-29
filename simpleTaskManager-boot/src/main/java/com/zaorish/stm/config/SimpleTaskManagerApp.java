@@ -1,4 +1,4 @@
-package com.zaorish;
+package com.zaorish.stm.config;
 
 import java.util.Arrays;
 

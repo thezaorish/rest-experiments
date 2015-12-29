@@ -1,4 +1,4 @@
-package com.zaorish;
+package com.zaorish.stm.web;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
