@@ -1,12 +1,23 @@
 package com.zaorish.stm.domain;
 
-public class Project {
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-    // projects(Id, name),
+public class Project {
 
     private Long id;
 
+    @Size(min = 5, max = 20, message = "Name of the project needs to be a string, between 5 and 20 characters")
+    @NotNull
     private String name;
+
+    public Project() {
+        //
+    }
+    public Project(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
