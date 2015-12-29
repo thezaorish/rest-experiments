@@ -1,12 +1,17 @@
 package com.zaorish.stm.domain;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@Entity
 public class Project {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false, length = 20)
     @Size(min = 5, max = 20, message = "Name of the project needs to be a string, between 5 and 20 characters")
     @NotNull
     private String name;

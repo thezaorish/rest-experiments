@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
-@Import({WebConfig.class})
+@Import({WebConfig.class, PersistenceConfig.class, ServiceConfig.class})
 public class SimpleTaskManagerApp {
     
     public static void main(String[] args) {
