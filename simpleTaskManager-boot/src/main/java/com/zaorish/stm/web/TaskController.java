@@ -29,7 +29,7 @@ public class TaskController {
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public List<Task> filterByProject(@RequestParam("projectId") Long projectId) {
+    public List<Task> filterByProject(@RequestParam(value = "projectId", required = true) Long projectId) {
         return taskService.findAllByProject(projectId);
     }
 

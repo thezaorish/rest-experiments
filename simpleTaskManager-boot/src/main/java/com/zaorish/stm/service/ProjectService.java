@@ -12,4 +12,12 @@ public interface ProjectService {
 
     List<Project> findAll();
 
+    List<Project> findPaginated(int page, int size);
+
+    List<Project> findPaginatedAndSorted(int page, int size, String sortField, String sortOrder);
+
+    void update(Long id, Project project);
+
+    void delete(Long id);
+
 }
