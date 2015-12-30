@@ -1,6 +1,8 @@
 package com.zaorish.stm.web;
 
+import com.zaorish.stm.commons.web.CrudController;
 import com.zaorish.stm.domain.Project;
+import com.zaorish.stm.commons.service.CrudService;
 import com.zaorish.stm.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,11 +12,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-import static com.zaorish.stm.web.RequestConstants.*;
+import static com.zaorish.stm.commons.web.RequestConstants.*;
 
 @Controller
 @RequestMapping("/projects")
-public class ProjectController {
+public class ProjectController extends CrudController<Project> {
 
     private ProjectService projectService;
 
@@ -26,7 +28,7 @@ public class ProjectController {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody @Valid final Project resource) {
-        projectService.create(resource);
+        createInternal(resource);
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -51,13 +53,18 @@ public class ProjectController {
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
     public void update(@PathVariable("id") final Long id, @RequestBody @Valid final Project resource) {
-        projectService.update(id, resource);
+        updateInternal(id, resource);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") final Long id) {
-        projectService.delete(id);
+        deleteInternal(id);
+    }
+
+    @Override
+    protected CrudService<Project> getService() {
+        return projectService;
     }
 
 }

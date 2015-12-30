@@ -1,13 +1,14 @@
 package com.zaorish.stm.domain;
 
 import com.google.common.base.MoreObjects;
+import com.zaorish.stm.commons.domain.Resource;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-public class Project {
+public class Project implements Resource {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,6 +30,8 @@ public class Project {
     public Long getId() {
         return id;
     }
+
+    @Override
     public void setId(Long id) {
         this.id = id;
     }

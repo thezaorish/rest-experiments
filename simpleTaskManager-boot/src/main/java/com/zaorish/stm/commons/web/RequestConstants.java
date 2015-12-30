@@ -1,4 +1,4 @@
-package com.zaorish.stm.web;
+package com.zaorish.stm.commons.web;
 
 public class RequestConstants {
 
