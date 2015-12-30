@@ -1,10 +1,12 @@
 package com.zaorish.stm.domain;
 
+import com.zaorish.stm.commons.domain.Resource;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Task {
+public class Task implements Resource {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

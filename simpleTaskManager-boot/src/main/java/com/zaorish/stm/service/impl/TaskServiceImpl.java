@@ -1,11 +1,13 @@
 package com.zaorish.stm.service.impl;
 
+import com.zaorish.stm.commons.service.AbstractCrudService;
 import com.zaorish.stm.domain.Project;
 import com.zaorish.stm.domain.Task;
 import com.zaorish.stm.persistence.dao.TaskJpaDao;
 import com.zaorish.stm.service.ProjectService;
 import com.zaorish.stm.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,7 +15,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class TaskServiceImpl implements TaskService {
+public class TaskServiceImpl extends AbstractCrudService<Task> implements TaskService {
 
     private TaskJpaDao taskJpaDao;
     private ProjectService projectService;
@@ -34,6 +36,11 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<Task> findAllByProject(Long projectId) {
         return taskJpaDao.findByProjectId(projectId);
+    }
+
+    @Override
+    protected PagingAndSortingRepository<Task, Long> getDao() {
+        return taskJpaDao;
     }
 
 }
