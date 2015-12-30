@@ -9,4 +9,6 @@ public interface TaskService extends CrudService<Task> {
 
     List<Task> findAllByProject(Long projectId);
 
+    List<Task> findAllByProjectPaginatedAndSorted(int page, int size, String sortField, String sortOrder, Long projectId);
+
 }

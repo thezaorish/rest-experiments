@@ -18,6 +18,8 @@ import static com.zaorish.stm.commons.web.RequestConstants.*;
 @RequestMapping("/tasks")
 public class TaskController extends CrudController<Task> {
 
+    private static final String PROJECT_ID = "projectId";
+
     private TaskService taskService;
 
     @Autowired
@@ -31,9 +33,9 @@ public class TaskController extends CrudController<Task> {
         createInternal(resource);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(params = {PROJECT_ID}, method = RequestMethod.GET)
     @ResponseBody
-    public List<Task> filterByProject(@RequestParam(value = "projectId", required = true) Long projectId) {
+    public List<Task> filterByProject(@RequestParam(value = PROJECT_ID, required = true) Long projectId) {
         return taskService.findAllByProject(projectId);
     }
 
@@ -43,9 +45,20 @@ public class TaskController extends CrudController<Task> {
         return taskService.findPaginated(page, size);
     }
 
-    // get sorted by priority
+    @RequestMapping(params = {PAGE, SIZE, SORT_FIELD, SORT_ORDER}, method = RequestMethod.GET)
+    @ResponseBody
+    public List<Task> findAllPaginatedAndSorted(@RequestParam(value = PAGE) final int page, @RequestParam(value = SIZE) final int size,
+                                                @RequestParam(value = SORT_FIELD) final String sortField, @RequestParam(value = SORT_ORDER) final String sortOrder) {
+        return taskService.findPaginatedAndSorted(page, size, sortField, sortOrder);
+    }
 
-    // get sorted by priority (filtered by project)
+    @RequestMapping(params = {PAGE, SIZE, SORT_FIELD, SORT_ORDER, PROJECT_ID}, method = RequestMethod.GET)
+    @ResponseBody
+    public List<Task> findFilteredPaginatedAndSorted(@RequestParam(value = PAGE) final int page, @RequestParam(value = SIZE) final int size,
+                                                     @RequestParam(value = SORT_FIELD) final String sortField, @RequestParam(value = SORT_ORDER) final String sortOrder,
+                                                     @RequestParam(value = PROJECT_ID, required = true) Long projectId) {
+        return taskService.findAllByProjectPaginatedAndSorted(page, size, sortField, sortOrder, projectId);
+    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)

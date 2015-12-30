@@ -34,8 +34,11 @@ public abstract class AbstractCrudService<T extends Resource> implements CrudSer
 
     @Override
     public List<T> findPaginatedAndSorted(int page, int size, String sortField, String sortOrder) {
-        List<T> resources = getDao().findAll(new PageRequest(page - 1, size, configureSort(sortField, sortOrder))).getContent();
+        List<T> resources = getDao().findAll(configurePageable(page, size, sortField, sortOrder)).getContent();
         return resources != null ? resources : Lists.newArrayList();
+    }
+    protected final PageRequest configurePageable(int page, int size, String sortField, String sortOrder) {
+        return new PageRequest(page - 1, size, configureSort(sortField, sortOrder));
     }
     private Sort configureSort(final String sortField, final String sortOrder) {
         return sortField != null ? new Sort(Sort.Direction.fromString(sortOrder), sortField) : null;

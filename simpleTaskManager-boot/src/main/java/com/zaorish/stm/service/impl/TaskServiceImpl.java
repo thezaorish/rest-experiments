@@ -1,5 +1,6 @@
 package com.zaorish.stm.service.impl;
 
+import com.google.common.collect.Lists;
 import com.zaorish.stm.commons.service.AbstractCrudService;
 import com.zaorish.stm.domain.Project;
 import com.zaorish.stm.domain.Task;
@@ -36,6 +37,13 @@ public class TaskServiceImpl extends AbstractCrudService<Task> implements TaskSe
     @Override
     public List<Task> findAllByProject(Long projectId) {
         return taskJpaDao.findByProjectId(projectId);
+    }
+
+    @Override
+    public List<Task> findAllByProjectPaginatedAndSorted(int page, int size, String sortField, String sortOrder, Long projectId) {
+        Project project = projectService.find(projectId);
+        List<Task> resources = taskJpaDao.findByProject(project, configurePageable(page, size, sortField, sortOrder));
+        return resources != null ? resources : Lists.newArrayList();
     }
 
     @Override
