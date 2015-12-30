@@ -49,10 +49,12 @@ public class ApiError {
     }
 
     @Override
-    public final String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("ApiError [status=").append(status).append(", message=").append(message).append(", detailedMessage=").append(detailedMessage).append("]");
-        return builder.toString();
+    public String toString() {
+        return com.google.common.base.MoreObjects.toStringHelper(this)
+                .add("status", status)
+                .add("message", message)
+                .add("detailedMessage", detailedMessage)
+                .toString();
     }
 
 }

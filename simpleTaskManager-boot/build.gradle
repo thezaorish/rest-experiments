@@ -32,6 +32,7 @@ dependencies {
     testCompile("org.springframework.boot:spring-boot-starter-test")
     // end::tests[]
 
+    // persistence
     compile("org.springframework:spring-jdbc")
     compile("org.springframework:spring-orm")
     compile("org.springframework.data:spring-data-jpa")
@@ -42,6 +43,9 @@ dependencies {
     compile("com.h2database:h2")
     runtime("mysql:mysql-connector-java")
     runtime("org.aspectj:aspectjweaver")
+
+    // miscellaneous
+    compile('com.google.guava:guava:19.0')
 }
 
 task wrapper(type: Wrapper) {

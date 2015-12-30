@@ -24,13 +24,13 @@ public class ProjectController {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody @Valid final Project resource) {
-        projectService.createProject(resource);
+        projectService.create(resource);
     }
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public List<Project> findAll() {
-        return null;
+        return projectService.findAll();
     }
 
 }
