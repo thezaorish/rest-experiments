@@ -32,6 +32,10 @@ dependencies {
     testCompile("org.springframework.boot:spring-boot-starter-test")
     // end::tests[]
 
+    // xml
+    compile("com.fasterxml.jackson.dataformat:jackson-dataformat-xml")
+    compile("org.codehaus.woodstox:woodstox-core-asl:4.4.1")
+
     // persistence
     compile("org.springframework:spring-jdbc")
     compile("org.springframework:spring-orm")
